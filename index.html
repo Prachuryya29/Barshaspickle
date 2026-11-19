@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barsha’s Pickle - Version 17</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{--green:#1f4030;--green2:#2f5a3a;--gold:#e3b04b;--red:#b3261e;--ink:#1f2a24;--muted:#5b665f;--bg:#d3e0c4;--cream:#fbe8b0;--card:#fff;--line:#dfe3d4}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Inter,system-ui,sans-serif}
+h1,h2,h3,p{margin:0}
+:is(a,input,select,textarea,button,.slide):focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+header{position:relative;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54'%3E%3Ccircle cx='7' cy='7' r='2.4' fill='white' fill-opacity='.16'/%3E%3Cpath d='M32 34q9-12 18 0q-9 12-18 0z' fill='white' fill-opacity='.08'/%3E%3Cpath d='M12 40l5-5 5 5-5 5z' fill='%23e3b04b' fill-opacity='.22'/%3E%3C/svg%3E"),linear-gradient(110deg,#142d1c,#2f5a3a 60%,#1f4030);color:#fff;padding:12px 24px;padding-top:calc(12px + env(safe-area-inset-top,0px));margin-bottom:10px}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-10px;height:10px;background:radial-gradient(circle at 10px 0,var(--gold) 9px,transparent 10px) 0 0/20px 10px repeat-x}
+
+.top{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+.brand h1{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:700;line-height:1.1}
+.brand p{color:#f6d27a;font-style:italic;margin-top:4px}
+.right{text-align:right;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.right a.ph{color:#fff;font-weight:600;font-size:1.1rem;text-decoration:none}
+.right .lbl{color:#cfe0c8;font-weight:400;font-size:.9rem;margin-right:6px}
+.payb{background:var(--gold);color:#2a1d00;border:0;border-radius:999px;font:inherit;font-weight:600;padding:9px 18px;cursor:pointer}
+.payb:hover{filter:brightness(1.07)}
+main{max-width:1180px;margin:0 auto;padding:22px 24px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.panel{background:var(--card);border:2px solid var(--green);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(31,64,48,.22)}
+#prodPanel{background:var(--cream);border-color:#d9a521}
+.pbody{padding:14px 20px 16px}
+.pbody h2{font-size:1.5rem;color:var(--green);margin-bottom:6px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.panel[hidden],section[hidden],.modal[hidden]{display:none}
+.panel>h2{font-size:1.3rem;color:#fff;background:linear-gradient(90deg,#1f4030,#2f5a3a);padding:11px 20px}
+#prodPanel>h2{background:linear-gradient(90deg,#e3b04b,#d9a521);color:#3a2a00}
+label{font-weight:500;display:block;margin-bottom:5px;font-size:.92rem}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:#fafbf6;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:54px;resize:vertical}
+.field{margin-bottom:10px}
+.customer-box{border:1.5px solid #cbd8c8;background:#f6faf3;border-radius:14px;padding:14px;margin-top:16px}
+.customer-box h3{color:var(--green);font-size:1.08rem;margin:0 0 12px}
+.customer-box input,.customer-box textarea{background:#fff;border-color:#bfcdbb}
+.customer-box .field:last-child{margin-bottom:0}
+.hint{font-weight:400;color:var(--muted);font-size:.82rem}
+.item{display:grid;grid-template-columns:1fr 76px 92px auto;gap:8px;align-items:end;padding:10px;background:#fafbf6;border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+.item label{font-size:.8rem;margin-bottom:3px}
+.line{font-weight:600;padding:10px 0;text-align:right;white-space:nowrap}
+.rm{background:none;border:0;color:var(--red);font:inherit;font-weight:500;cursor:pointer;padding:10px 0}.rm[hidden]{display:none}
+.btn{background:none;border:1.5px solid var(--green);color:var(--green);border-radius:999px;font:inherit;font-weight:600;padding:8px 16px;cursor:pointer}
+.btn:hover{background:var(--green);color:#fff}
+.total{display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 4px;padding-top:12px;border-top:2px solid var(--green);font-weight:600}
+.total strong{font-size:1.6rem;color:var(--green)}
+.note{font-size:.88rem;color:var(--muted)}
+.cod{background:#f1f6ee;border:1.5px solid var(--green);border-radius:10px;padding:10px 12px;margin:12px 0;font-size:.93rem}
+.go{width:100%;background:var(--green);color:#fff;border:0;border-radius:12px;font:inherit;font-weight:600;font-size:1.05rem;padding:14px;cursor:pointer;margin-top:6px}
+.go:hover{background:var(--green2)}
+.err{color:var(--red);font-size:.85rem;min-height:1em;margin-top:3px}
+.slider{position:relative;overflow:hidden;border-radius:14px;height:clamp(260px,44vh,360px);background:#f3f5ec}
+.track{display:flex;height:100%;transition:transform .6s ease}
+.slide{flex:0 0 100%;display:flex;flex-direction:column;cursor:pointer;min-width:0}
+/* Keep the complete product photo visible without cropping */
+.pic{flex:1 1 auto;display:flex;align-items:center;justify-content:center;padding:14px;min-height:0;min-width:0;overflow:hidden}
+.pic img{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center center}
+.pic svg{display:block;width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}
+.cap{background:rgba(255,255,255,.88);padding:12px 16px 34px;text-align:center}
+.cap h3{font-size:1.2rem;color:var(--green)}
+.cap p{color:var(--muted);font-size:.9rem}
+.dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:8px}
+.product-girl-wrap{display:flex;justify-content:center;align-items:center;padding:8px 0 0;min-height:0}
+.product-girl{display:block;height:112px;max-height:112px;width:auto;max-width:45%;object-fit:contain;object-position:center bottom}
+@media(max-width:520px){.product-girl{height:96px;max-height:96px;max-width:48%}}
+.dots button{width:10px;height:10px;border-radius:50%;border:0;background:#b8c2ad;padding:0;cursor:pointer}
+.dots button.on{background:var(--green);width:22px;border-radius:6px}
+.arrow{position:absolute;top:42%;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:var(--green);font-size:1.3rem;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.arrow.l{left:10px}.arrow.r{right:10px}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(15,25,18,.6);display:grid;place-items:center;padding:16px}
+.mbox{background:#fff;border-radius:18px;padding:22px;width:100%;max-width:420px;max-height:92vh;overflow:auto;text-align:center}
+.mbox h2{color:var(--green);font-size:1.5rem;margin-bottom:6px}
+.mbox .pic{height:240px;flex:none;background:#f3f5ec;border-radius:12px;margin-bottom:12px}
+.mbox .price{font-size:1.3rem;font-weight:700;margin:6px 0}
+.mrow{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+#qrbox{background:#fff;padding:12px;border:1px solid var(--line);border-radius:12px;display:grid;place-items:center;min-height:200px;min-width:200px;margin:12px auto;width:fit-content;font-size:.9rem}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{text-align:left;padding:7px 4px;border-bottom:1px solid var(--line)}
+th:nth-child(n+2),td:nth-child(n+2){text-align:right}
+.meta p{margin:2px 0}
+
+/* Thank-you message and rider illustration */
+.thankyou-hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 10px auto;
+    overflow: visible;
+}
+
+.thankyou-message {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+    font-family: Cambria, Georgia, serif;
+    font-size: clamp(15px, 2vw, 21px);
+    font-weight: 700;
+    line-height: 1.4;
+    color: #8B0000;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.thankyou-girl {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 0 0 145px;
+    width: 145px !important;
+    height: 145px !important;
+    max-width: 145px !important;
+    min-width: 0;
+    object-fit: contain;
+    object-position: center;
+    margin: 0;
+}
+
+/* Mobile: keep text and GIF side by side and give the GIF enough space */
+@media screen and (max-width: 520px) {
+    .thankyou-hero {
+        gap: 6px;
+        padding: 0 4px;
+    }
+
+    .thankyou-message {
+        flex: 1 1 0;
+        font-size: clamp(12px, 3.5vw, 15px);
+        line-height: 1.3;
+    }
+
+    .thankyou-girl {
+        display: block !important;
+        flex: 0 0 100px;
+        width: 100px !important;
+        height: 112px !important;
+        max-width: 100px !important;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .thankyou-hero {
+        gap: 4px;
+    }
+
+    .thankyou-message {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+
+    .thankyou-girl {
+        flex-basis: 88px;
+        width: 88px !important;
+        height: 100px !important;
+        max-width: 88px !important;
+    }
+}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div class="brand"><h1>Barsha’s Pickle</h1><p>Homemade with love, in every jar</p></div>
+  <div style="flex:1"></div>
+  <div class="right">
+    <div><span class="lbl">Contact:</span><a class="ph" id="phone" href="#"></a></div>
+    <button class="payb" type="button" id="openPay">Click here to pay in advance</button>
+  </div>
+</div></header>
+
+<main>
+  <div class="panel" id="orderPanel">
+    <h2 id="orderHeading">Order now</h2>
+    <div class="pbody">
+    <section id="formWrap">
+      <form id="form" novalidate>
+        <div id="items"></div><p class="err" id="e-items"></p>
+        <button type="button" class="btn" id="add">+ Add more product</button>
+        <div class="total"><span>Total amount</span><strong id="total">Rs 0.00</strong></div>
+        <p class="note">Delivery charge: Rs 0.00 (free)</p>
+        <div class="customer-box">
+          <h3>Customer details</h3>
+          <div class="field"><label for="name">Name</label><input id="name" autocomplete="name" required><p class="err" id="e-name"></p></div>
+          <div class="field"><label for="address">Address</label><textarea id="address" autocomplete="street-address" required></textarea><p class="err" id="e-address"></p></div>
+          <div class="field"><label for="contact">Contact number</label><input id="contact" type="tel" inputmode="tel" autocomplete="tel" required><p class="err" id="e-contact"></p></div>
+        </div>
+        <div class="cod"><strong>Cash on delivery</strong> · Free delivery</div>
+        <button class="go" type="submit">Confirm order</button>
+      </form>
+    </section>
+    <section id="done" hidden aria-live="polite" tabindex="-1">
+      <p class="printonly">Barsha’s Pickle – Order slip</p>
+      <div class="thankyou-hero">
+        <p class="thankyou-message"><strong>Thank you for choosing Barsha’s Pickle!<br>Your order is being prepared!<br>We will notify you once your order is ready for delivery.</strong></p>
+        <img class="thankyou-girl" src="./Rider.gif" alt="Barsha’s Pickle rider illustration" loading="eager" decoding="async">
+      </div>
+      <p class="err noprint" id="saveStatus"></p>
+      <div class="meta" id="meta" style="margin-top:12px"></div>
+      <table><thead><tr><th>Product</th><th>Qty</th><th>Amount</th></tr></thead><tbody id="rows"></tbody></table>
+      <div class="total"><span>Total amount</span><strong id="grand"></strong></div>
+      <p class="note">Delivery: Free</p>
+      <div class="actions noprint"><button class="btn" type="button" id="print">Print order</button><button class="btn" type="button" id="again">Place another order</button></div>
+    </section>
+    </div>
+  </div>
+
+  <div class="panel" id="prodPanel">
+    <h2>Our products</h2>
+    <div class="pbody"><div class="slider" id="slider" aria-roledescription="carousel">
+      <div class="track" id="track"></div>
+      <button class="arrow l" type="button" id="prev" aria-label="Previous product">‹</button>
+      <button class="arrow r" type="button" id="next" aria-label="Next product">›</button>
+      <div class="dots" id="dots"></div>
+    </div>
+    <div class="product-girl-wrap">
+      <img class="product-girl" src="Girl.png" alt="Barsha’s Pickle girl illustration">
+    </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal" id="mProd" hidden role="dialog" aria-modal="true" aria-label="Product details"><div class="mbox">
+  <div class="pic" id="mPic"></div>
+  <h2 id="mName"></h2><p class="note" id="mSize"></p><p class="price" id="mPrice"></p><p id="mDesc"></p>
+  <div class="mrow"><button class="go" type="button" id="mAdd" style="width:auto;padding:11px 22px;margin:0">Add to order</button><button class="btn" type="button" data-close>Close</button></div>
+</div></div>
+
+<div class="modal" id="mPay" hidden role="dialog" aria-modal="true" aria-label="Pay in advance"><div class="mbox">
+  <h2>Pay in advance</h2>
+  <p id="payAmt"></p>
+  <div id="qrbox"></div>
+  <p class="note" id="upiNote"></p>
+  <div class="mrow"><button class="btn" type="button" data-close>Close</button></div>
+</div></div>
+
+<script>
+(function(){
+  // ---- Settings you can change (Version 17) ----
+  var PHONE="1234567890";            // your contact number
+  var UPI_ID="yourupiid@bank";       // your UPI ID for the QR code
+  var SHEET_URL="https://script.google.com/macros/s/AKfycbx8w0On71hV8lVXo2vOdCXlEwv4JcdiLFKAXM2URayCtgGZCtveZS-ZG_xOAbyM84hQFQ/exec";                  // Google Apps Script Version 10 Web App URL (deploy this script as a new version; keep this URL if editing the existing deployment)
+  var SLIDE_MS=2000;                 // product slider speed (2000 = 2 seconds)
+  // Product photos: keep Image 1.png through Image 4.png in the SAME folder as this HTML file.
+  // Image 1 = Jolokiar Juti (50 ml, Rs 30.00)
+  // Image 2 = Garlic Aachaar (50 ml, Rs 40.00)
+  // Image 3 = Jalphair Juti (50 g, Rs 25.00)
+  // Image 4 = Jalphair Juti (150 g, Rs 60.00)
+  // If a picture is missing, a drawn jar is shown instead.
+  var P=[
+    {n:"Jolokiar Juti",u:"50 ml",price:30,img:"Image 1.png",bg:"#fdeadc",fill:"#c8431a",bit:"#2f8f3a",desc:"Homemade pickle."},
+    {n:"Garlic Aachaar",u:"50 ml",price:40,img:"Image 2.png",bg:"#fff0df",fill:"#b96b24",bit:"#e7bd65",desc:"Homemade pickle."},
+    {n:"Jalphair Juti",u:"50 g",price:25,img:"Image 3.png",bg:"#eef1d6",fill:"#6f7d2a",bit:"#a9b845",desc:"Homemade pickle."},
+    {n:"Jalphair Juti",u:"150 g",price:60,img:"Image 4.png",bg:"#eef1d6",fill:"#6f7d2a",bit:"#a9b845",desc:"Homemade pickle."}
+  ];
+  // ---------------------------------
+  var $=function(id){return document.getElementById(id)};
+  var items=$("items"),state=null;
+  function money(v){return "Rs "+v.toFixed(2)}
+  var ph=$("phone");ph.textContent=PHONE;ph.href="tel:"+PHONE;
+
+  function jar(p){
+    return '<svg viewBox="0 0 200 240" role="img" aria-label="Jar of '+p.n+'"><rect x="42" y="38" width="116" height="26" rx="8" fill="#b3261e"/><rect x="36" y="60" width="128" height="164" rx="22" fill="#eaf3ee" stroke="#6b8f7a" stroke-width="4"/><rect x="46" y="84" width="108" height="130" rx="14" fill="'+p.fill+'"/>'+
+    '<ellipse cx="72" cy="106" rx="16" ry="7" fill="'+p.bit+'" transform="rotate(-20 72 106)"/><ellipse cx="128" cy="100" rx="14" ry="6" fill="'+p.bit+'" transform="rotate(25 128 100)"/><ellipse cx="66" cy="196" rx="15" ry="6" fill="'+p.bit+'" transform="rotate(15 66 196)"/><ellipse cx="134" cy="198" rx="16" ry="7" fill="'+p.bit+'" transform="rotate(-18 134 198)"/>'+
+    '<rect x="52" y="124" width="96" height="62" rx="8" fill="#fff6e0" stroke="#b3261e" stroke-width="2"/><text x="100" y="148" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-weight="700" font-size="12" fill="#b3261e">'+p.n+'</text><text x="100" y="164" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="10" fill="#1f4030">'+p.u+' · Rs '+p.price+'</text><text x="100" y="178" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8" fill="#5b665f">Barsha’s Pickle</text>'+
+    '<path d="M46 94v118" stroke="#fff" stroke-width="5" opacity=".5" stroke-linecap="round"/></svg>';
+  }
+  function pic(p){return p.img?'<img alt="'+p.n+'" src="'+encodeURI(p.img)+'">':jar(p)}
+  function fix(box,p){box.querySelectorAll("img").forEach(function(im){im.onerror=function(){var t=document.createElement("div");t.innerHTML=jar(p);im.replaceWith(t.firstChild)}})}
+
+  // Order IDs: one ID per order, categorized by the first selected product.
+  // Jolokiar= BHT, Garlic=GAR, Jalphair=JAL; daily sequence is stored in this browser.
+  // ---- Order form ----
+  function addItem(idx,qty){
+    var d=document.createElement("div");d.className="item";
+    d.innerHTML='<div><label>Pickle</label><select class="p"><option value="">Select product</option>'+P.map(function(p,i){return '<option value="'+i+'">'+p.n+' ('+p.u+') – Rs '+p.price.toFixed(2)+'</option>'}).join("")+'</select></div>'+
+      '<div><label>Quantity</label><input class="q" type="number" min="1" max="99" value="1" inputmode="numeric"></div>'+
+      '<div class="line">Rs 0.00</div><button type="button" class="rm">Remove</button>';
+    d.querySelector(".p").value=(idx===undefined||idx===null||idx==="")?"":String(idx);d.querySelector(".q").value=qty||1;
+    d.querySelector(".rm").onclick=function(){d.remove();calc()};
+    d.querySelector(".p").onchange=calc;d.querySelector(".q").oninput=calc;
+    items.appendChild(d);calc();
+  }
+  function read(){
+    var out=[];
+    items.querySelectorAll(".item").forEach(function(el){
+      var pv=el.querySelector(".p").value,p=pv===""?null:P[+pv],q=parseInt(el.querySelector(".q").value,10);
+      if(p&&q>0)out.push({n:p.n,u:p.u,q:q,price:p.price,amt:q*p.price});
+    });
+    return out;
+  }
+  function total(){return read().reduce(function(s,l){return s+l.amt},0)}
+  function calc(){
+    var all=items.querySelectorAll(".item"),sum=0;
+    all.forEach(function(el){
+      var pv=el.querySelector(".p").value,p=pv===""?null:P[+pv],q=parseInt(el.querySelector(".q").value,10);
+      var a=(p&&q>0)?q*p.price:0;sum+=a;el.querySelector(".line").textContent=money(a);
+      el.querySelector(".rm").hidden=all.length<2;
+    });
+    $("total").textContent=money(sum);$("e-items").textContent="";
+  }
+  function addProduct(i){
+    var found=null,empty=null;
+    items.querySelectorAll(".item").forEach(function(el){var v=el.querySelector(".p").value;if(v===String(i))found=el;if(v==="")empty=el});
+    if(found){var q=found.querySelector(".q");q.value=(parseInt(q.value,10)||0)+1;calc()}
+    else if(empty){empty.querySelector(".p").value=String(i);empty.querySelector(".q").value=1;calc()}
+    else addItem(i,1);
+  }
+  function err(id,m){$("e-"+id).textContent=m||""}
+  $("add").onclick=function(){addItem("",1)};
+
+  $("form").onsubmit=function(e){
+    e.preventDefault();
+    var name=$("name").value.trim(),addr=$("address").value.trim(),contact=$("contact").value.trim(),ok=true;
+    err("name",name?"":"Enter your name.");if(!name)ok=false;
+    err("address",addr?"":"Enter your delivery address.");if(!addr)ok=false;
+    var dg=contact.replace(/\D/g,"");var cOk=dg.length>=10&&dg.length<=13;
+    err("contact",cOk?"":"Enter a valid phone number (at least 10 digits).");if(!cOk)ok=false;
+    var lines=read();
+    err("items",lines.length?"":"Select a product and quantity.");if(!lines.length)ok=false;
+    if(!ok)return;
+    state={name:name,addr:addr,contact:contact,lines:lines,total:total()};
+    finish();
+  };
+
+  function sendToSheet(order){
+    var st=$("saveStatus");st.textContent="";
+    if(!SHEET_URL)return;
+    fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(order)})
+      .catch(function(){st.textContent="We could not send your order to the shop. Please print this page and contact us to confirm."});
+  }
+  function makeOrderId(d, lines){
+    var firstName=(lines[0]&&lines[0].n)||"";
+    var code=firstName.indexOf("Jolokiar")===0?"BHT":(firstName.indexOf("Garlic")===0?"GAR":"JAL");
+    var pad=function(n){return String(n).padStart(2,"0")};
+    var dateKey=d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+    var storageKey="barsha_order_seq_"+dateKey+"_"+code;
+    var seq=1;
+    try{seq=(parseInt(localStorage.getItem(storageKey)||"0",10)||0)+1;localStorage.setItem(storageKey,String(seq));}
+    catch(e){seq=Date.now()%100000;}
+    return "BP-"+dateKey+"-"+code+pad(seq).padStart(3,"0");
+  }
+  function finish(){
+    var d=new Date();
+    var id=makeOrderId(d,state.lines);
+    var payText="Cash on delivery";
+    var meta=$("meta");meta.innerHTML="";
+    [["Order ID",id],["Name",state.name],["Contact No.",state.contact],["Address",state.addr],["Payment",payText],["Date and Time",d.toLocaleString()]]
+      .forEach(function(r){var p=document.createElement("p"),b=document.createElement("strong");b.textContent=r[0]+": ";p.appendChild(b);p.appendChild(document.createTextNode(r[1]));meta.appendChild(p)});
+    var tb=$("rows");tb.innerHTML="";
+    state.lines.forEach(function(l){
+      var tr=document.createElement("tr");
+      [l.n+" ("+l.u+") @ "+money(l.price),String(l.q),money(l.amt)].forEach(function(c){var td=document.createElement("td");td.textContent=c;tr.appendChild(td)});
+      tb.appendChild(tr);
+    });
+    $("grand").textContent=money(state.total);
+    // Version 10: send exactly eight fields in the Apps Script Version 10 order to the updated Apps Script.
+    // Field names: orderId, name, contact, address, items, total, payment, dateTime.
+    sendToSheet({
+      // Exactly eight fields, in the same order as Apps Script Version 10. No UPI Txn ID or Status.
+      orderId:id,
+      name:state.name,
+      contact:state.contact,
+      address:state.addr,
+      items:state.lines.map(function(l){return l.n+" ("+l.u+") x "+l.q}).join("; "),
+      total:state.total.toFixed(2),
+      payment:"Cash on delivery",
+      dateTime:d.toLocaleString("en-IN", {timeZone:"Asia/Kolkata"}),
+      dateTimeISO:d.toISOString()
+    });
+    $("formWrap").hidden=true;$("done").hidden=false;$("orderHeading").textContent="Order placed";$("done").focus();
+    $("orderPanel").scrollIntoView({behavior:"smooth"});
+  }
+  $("print").onclick=function(){window.print()};
+  $("again").onclick=function(){
+    $("form").reset();items.innerHTML="";addItem("",1);
+    $("done").hidden=true;$("formWrap").hidden=false;$("orderHeading").textContent="Order now";
+  };
+
+  // ---- Product slider ----
+  var track=$("track"),dots=$("dots"),slider=$("slider"),cur=0,timer=null,touchT=null;
+  P.forEach(function(p,i){
+    var s=document.createElement("div");s.className="slide";s.tabIndex=0;s.setAttribute("role","button");s.setAttribute("aria-label","View "+p.n);s.style.background=p.bg;
+    s.innerHTML='<div class="pic">'+pic(p)+'</div><div class="cap"><h3></h3><p></p></div>';fix(s,p);
+    s.querySelector("h3").textContent=p.n;s.querySelector("p").textContent=p.u+" · Rs "+p.price.toFixed(2)+" · Click to view";
+    s.onclick=function(){openProd(i)};
+    s.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openProd(i)}};
+    track.appendChild(s);
+    var b=document.createElement("button");b.type="button";b.setAttribute("aria-label","Show "+p.n);b.onclick=function(){go(i)};dots.appendChild(b);
+  });
+  function go(i){
+    cur=(i+P.length)%P.length;track.style.transform="translateX(-"+(cur*100)+"%)";
+    dots.querySelectorAll("button").forEach(function(b,k){b.className=k===cur?"on":""});
+  }
+  function stop(){clearInterval(timer);timer=null}
+  function start(){stop();timer=setInterval(function(){go(cur+1)},SLIDE_MS)}
+  $("prev").onclick=function(){go(cur-1)};$("next").onclick=function(){go(cur+1)};
+  slider.addEventListener("mouseenter",stop);slider.addEventListener("mouseleave",start);
+  slider.addEventListener("focusin",stop);slider.addEventListener("focusout",start);
+  slider.addEventListener("touchstart",function(){stop();clearTimeout(touchT)},{passive:true});
+  slider.addEventListener("touchend",function(){touchT=setTimeout(start,2500)});
+  go(0);start();
+
+  // ---- Product + payment pop-ups ----
+  var openIdx=0;
+  function show(m){$(m).hidden=false;stop()}
+  function closeAll(){$("mProd").hidden=true;$("mPay").hidden=true;start()}
+  function openProd(i){
+    var p=P[i];openIdx=i;
+    $("mPic").innerHTML=pic(p);fix($("mPic"),p);$("mName").textContent=p.n;$("mSize").textContent="Pack size: "+p.u;
+    $("mPrice").textContent=money(p.price)+" per unit";$("mDesc").textContent=p.desc+" Free delivery.";
+    show("mProd");
+  }
+  $("mAdd").onclick=function(){addProduct(openIdx);closeAll();$("orderPanel").scrollIntoView({behavior:"smooth"})};
+  $("openPay").onclick=function(){
+    var t=total(),box=$("qrbox");box.innerHTML="";
+    var link="upi://pay?pa="+encodeURIComponent(UPI_ID)+"&pn="+encodeURIComponent("Barsha's Pickle")+"&cu=INR"+(t>0?"&am="+t.toFixed(2):"");
+    $("payAmt").textContent=t>0?"Scan to pay "+money(t):"Scan with any UPI app and enter your amount.";
+    try{new QRCode(box,{text:link,width:200,height:200})}
+    catch(x){box.textContent="QR code could not load. Pay to UPI ID "+UPI_ID}
+    $("upiNote").textContent="UPI ID: "+UPI_ID;
+    show("mPay");
+  };
+  document.querySelectorAll("[data-close]").forEach(function(b){b.onclick=closeAll});
+  document.querySelectorAll(".modal").forEach(function(m){m.addEventListener("click",function(e){if(e.target===m)closeAll()})});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")closeAll()});
+
+  addItem("",1);
+})();
+</script>
+</body>
+</html>
