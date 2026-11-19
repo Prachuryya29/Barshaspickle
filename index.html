@@ -477,7 +477,7 @@ main {
 </head>
 <body>
 <header><div class="top">
-  <div class="brand"><h1>Barsha’s Pickle</h1><p>Homemade with love, in every jar</p></div>
+  <div class="brand"><h1>Barsha’s Pickle</h1><p>A Little Jar of Homemade Happiness !</p></div>
   <div style="flex:1"></div>
   <div class="right">
     <div><span class="lbl">Contact:</span><a class="ph" id="phone" href="#"></a></div>
@@ -553,8 +553,8 @@ main {
 <script>
 (function(){
   // ---- Settings you can change (Version 19) ----
-  var PHONE="1234567890";            // your contact number
-  var UPI_ID="yourupiid@bank";       // your UPI ID for the QR code
+  var PHONE="+91 9707895693";            // your contact number
+  var UPI_ID="8399063411@upi";       // your UPI ID for the QR code
   var SHEET_URL="https://script.google.com/macros/s/AKfycbx8w0On71hV8lVXo2vOdCXlEwv4JcdiLFKAXM2URayCtgGZCtveZS-ZG_xOAbyM84hQFQ/exec";                  // Google Apps Script Version 10 Web App URL (deploy this script as a new version; keep this URL if editing the existing deployment)
   var SLIDE_MS=2000;                 // product slider speed (2000 = 2 seconds)
   // Product photos: keep Image 1.png through Image 4.png in the SAME folder as this HTML file.
@@ -730,10 +730,8 @@ main {
   $("mAdd").onclick=function(){addProduct(openIdx);closeAll();$("orderPanel").scrollIntoView({behavior:"smooth"})};
   $("openPay").onclick=function(){
     var t=total(),box=$("qrbox");box.innerHTML="";
-    var link="upi://pay?pa="+encodeURIComponent(UPI_ID)+"&pn="+encodeURIComponent("Barsha's Pickle")+"&cu=INR"+(t>0?"&am="+t.toFixed(2):"");
-    $("payAmt").textContent=t>0?"Scan to pay "+money(t):"Scan with any UPI app and enter your amount.";
-    try{new QRCode(box,{text:link,width:200,height:200})}
-    catch(x){box.textContent="QR code could not load. Pay to UPI ID "+UPI_ID}
+    box.innerHTML='<img src="QR.jpeg" alt="Barsha’s Pickle Payment QR Code" style="display:block;width:200px;height:200px;max-width:100%;object-fit:contain;">';
+    $("payAmt").textContent=t>0?"Scan to pay "+money(t):"Scan the QR code to pay.";
     $("upiNote").textContent="UPI ID: "+UPI_ID;
     show("mPay");
   };
