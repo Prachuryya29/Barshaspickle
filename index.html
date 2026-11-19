@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Barsha’s Pickle - Version 17</title>
+<title>Barsha’s Pickle - Version 19</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
@@ -164,6 +164,315 @@ th:nth-child(n+2),td:nth-child(n+2){text-align:right}
         max-width: 88px !important;
     }
 }
+
+
+/* ---------- Responsive layout for phones and tablets ---------- */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    width: 100%;
+    min-width: 320px;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+main {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.panel {
+    min-width: 0;
+}
+
+@media screen and (max-width: 800px) {
+    header {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .top {
+        justify-content: center;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .top > div[style*="flex:1"] {
+        display: none;
+    }
+
+    .brand,
+    .right {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .right {
+        gap: 7px;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        padding: 18px 14px 22px;
+    }
+
+    #orderPanel {
+        grid-row: 1;
+    }
+
+    #prodPanel {
+        grid-row: 2;
+    }
+
+    .pbody {
+        padding: 14px;
+    }
+
+    .slider {
+        height: clamp(230px, 55vw, 340px);
+    }
+
+    .item {
+        grid-template-columns: minmax(0, 1fr) 78px;
+        gap: 8px;
+        align-items: end;
+    }
+
+    .item > div:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .item .line {
+        text-align: left;
+        padding: 8px 0;
+    }
+
+    .item .rm {
+        justify-self: end;
+        padding: 8px 4px;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+        font-size: 16px;
+    }
+
+    .go,
+    .btn,
+    .payb {
+        min-height: 44px;
+    }
+
+    .thankyou-hero {
+        gap: 8px;
+        align-items: center;
+    }
+
+    .thankyou-message {
+        font-size: clamp(13px, 3.6vw, 17px);
+        line-height: 1.35;
+    }
+
+    .thankyou-girl {
+        flex: 0 0 104px;
+        width: 104px !important;
+        height: 116px !important;
+        max-width: 104px !important;
+        object-fit: contain;
+    }
+
+    .mbox {
+        width: min(100%, 420px);
+        padding: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .brand h1 {
+        font-size: clamp(1.55rem, 7vw, 1.9rem);
+    }
+
+    .brand p {
+        font-size: .9rem;
+    }
+
+    .right a.ph {
+        font-size: 1rem;
+    }
+
+    .payb {
+        width: 100%;
+        max-width: 300px;
+        padding: 10px 12px;
+    }
+
+    main {
+        padding: 16px 10px 20px;
+        gap: 14px;
+    }
+
+    .panel {
+        border-radius: 13px;
+    }
+
+    .panel > h2 {
+        font-size: 1.15rem;
+        padding: 10px 14px;
+    }
+
+    .pbody {
+        padding: 12px;
+    }
+
+    .pbody h2 {
+        font-size: 1.25rem;
+    }
+
+    .row2 {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .customer-box {
+        padding: 11px;
+    }
+
+    .slider {
+        height: 250px;
+    }
+
+    .pic {
+        padding: 8px;
+    }
+
+    .cap {
+        padding: 9px 10px 30px;
+    }
+
+    .cap h3 {
+        font-size: 1.05rem;
+    }
+
+    .cap p {
+        font-size: .82rem;
+    }
+
+    .arrow {
+        width: 32px;
+        height: 32px;
+    }
+
+    .thankyou-hero {
+        gap: 5px;
+        padding: 0;
+    }
+
+    .thankyou-message {
+        font-size: 13px;
+        line-height: 1.3;
+        overflow-wrap: break-word;
+    }
+
+    .thankyou-girl {
+        flex-basis: 92px;
+        width: 92px !important;
+        height: 108px !important;
+        max-width: 92px !important;
+    }
+
+    table {
+        table-layout: fixed;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+    }
+
+    th, td {
+        padding: 6px 3px;
+    }
+
+    .total strong {
+        font-size: 1.35rem;
+    }
+
+    .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .actions .btn {
+        flex: 1 1 130px;
+    }
+
+    #qrbox {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    #qrbox canvas,
+    #qrbox img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    main {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .thankyou-message {
+        font-size: 12px;
+    }
+
+    .thankyou-girl {
+        flex-basis: 82px;
+        width: 82px !important;
+        height: 96px !important;
+        max-width: 82px !important;
+    }
+
+    .item {
+        grid-template-columns: minmax(0, 1fr) 68px;
+    }
+}
+
+/* Prevent wide order tables and panels from creating horizontal scrolling */
+#done,
+.meta,
+.panel,
+.pbody {
+    min-width: 0;
+}
+
+@media print {
+    main {
+        display: block;
+        padding: 0;
+    }
+    #prodPanel,
+    header,
+    .noprint {
+        display: none !important;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -243,7 +552,7 @@ th:nth-child(n+2),td:nth-child(n+2){text-align:right}
 
 <script>
 (function(){
-  // ---- Settings you can change (Version 17) ----
+  // ---- Settings you can change (Version 19) ----
   var PHONE="1234567890";            // your contact number
   var UPI_ID="yourupiid@bank";       // your UPI ID for the QR code
   var SHEET_URL="https://script.google.com/macros/s/AKfycbx8w0On71hV8lVXo2vOdCXlEwv4JcdiLFKAXM2URayCtgGZCtveZS-ZG_xOAbyM84hQFQ/exec";                  // Google Apps Script Version 10 Web App URL (deploy this script as a new version; keep this URL if editing the existing deployment)
