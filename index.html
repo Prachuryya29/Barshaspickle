@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Barsha’s Pickle - Version 19</title>
+<title>Barsha’s Pickle - Version 25</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
@@ -552,22 +552,24 @@ main {
 
 <script>
 (function(){
-  // ---- Settings you can change (Version 19) ----
+  // ---- Settings you can change (Version 25) ----
   var PHONE="+91 9707895693";            // your contact number
   var UPI_ID="8399063411@upi";       // your UPI ID for the QR code
   var SHEET_URL="https://script.google.com/macros/s/AKfycbx8w0On71hV8lVXo2vOdCXlEwv4JcdiLFKAXM2URayCtgGZCtveZS-ZG_xOAbyM84hQFQ/exec";                  // Google Apps Script Version 10 Web App URL (deploy this script as a new version; keep this URL if editing the existing deployment)
   var SLIDE_MS=2000;                 // product slider speed (2000 = 2 seconds)
-  // Product photos: keep Image 1.png through Image 4.png in the SAME folder as this HTML file.
-  // Image 1 = Jolokiar Juti (50 ml, Rs 30.00)
-  // Image 2 = Garlic Aachaar (50 ml, Rs 40.00)
+  // Product photos: keep Image 1.png through Image 5.png in the SAME folder as this HTML file.
+  // Image 1 = Jolokiar Juti (50 g, Rs 30.00)
+  // Image 2 = Garlic Aachaar (50 g, Rs 40.00)
   // Image 3 = Jalphair Juti (50 g, Rs 25.00)
   // Image 4 = Jalphair Juti (150 g, Rs 60.00)
+  // Image 5 = Chicken Pickle (50 g, Rs 50.00)
   // If a picture is missing, a drawn jar is shown instead.
   var P=[
-    {n:"Jolokiar Juti",u:"50 ml",price:30,img:"Image 1.png",bg:"#fdeadc",fill:"#c8431a",bit:"#2f8f3a",desc:"Homemade pickle."},
-    {n:"Garlic Aachaar",u:"50 ml",price:40,img:"Image 2.png",bg:"#fff0df",fill:"#b96b24",bit:"#e7bd65",desc:"Homemade pickle."},
+    {n:"Jolokiar Juti",u:"50 g",price:30,img:"Image 1.png",bg:"#fdeadc",fill:"#c8431a",bit:"#2f8f3a",desc:"Homemade pickle."},
+    {n:"Garlic Aachaar",u:"50 g",price:40,img:"Image 2.png",bg:"#fff0df",fill:"#b96b24",bit:"#e7bd65",desc:"Homemade pickle."},
     {n:"Jalphair Juti",u:"50 g",price:25,img:"Image 3.png",bg:"#eef1d6",fill:"#6f7d2a",bit:"#a9b845",desc:"Homemade pickle."},
-    {n:"Jalphair Juti",u:"150 g",price:60,img:"Image 4.png",bg:"#eef1d6",fill:"#6f7d2a",bit:"#a9b845",desc:"Homemade pickle."}
+    {n:"Jalphair Juti",u:"150 g",price:60,img:"Image 4.png",bg:"#eef1d6",fill:"#6f7d2a",bit:"#a9b845",desc:"Homemade pickle."},
+    {n:"Chicken Pickle",u:"50 g",price:50,img:"Image 5.png",bg:"#fff0df",fill:"#a44d24",bit:"#d98b43",desc:"Homemade chicken pickle."}
   ];
   // ---------------------------------
   var $=function(id){return document.getElementById(id)};
@@ -585,7 +587,7 @@ main {
   function fix(box,p){box.querySelectorAll("img").forEach(function(im){im.onerror=function(){var t=document.createElement("div");t.innerHTML=jar(p);im.replaceWith(t.firstChild)}})}
 
   // Order IDs: one ID per order, categorized by the first selected product.
-  // Jolokiar= BHT, Garlic=GAR, Jalphair=JAL; daily sequence is stored in this browser.
+  // Jolokiar= BHT, Garlic=GAR, Jalphair=JAL, Chicken=CHK; daily sequence is stored in this browser.
   // ---- Order form ----
   function addItem(idx,qty){
     var d=document.createElement("div");d.className="item";
@@ -647,7 +649,7 @@ main {
   }
   function makeOrderId(d, lines){
     var firstName=(lines[0]&&lines[0].n)||"";
-    var code=firstName.indexOf("Jolokiar")===0?"BHT":(firstName.indexOf("Garlic")===0?"GAR":"JAL");
+    var code=firstName.indexOf("Jolokiar")===0?"BHT":(firstName.indexOf("Garlic")===0?"GAR":(firstName.indexOf("Chicken")===0?"CHK":"JAL"));
     var pad=function(n){return String(n).padStart(2,"0")};
     var dateKey=d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
     var storageKey="barsha_order_seq_"+dateKey+"_"+code;
