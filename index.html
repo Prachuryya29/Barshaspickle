@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Barsha’s Pickle - Version 25</title>
+<title>Barsha’s Pickle - Version 28</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
@@ -473,12 +473,37 @@ main {
     }
 }
 
+
+/* Light blue theme */
+:root{--green:#17649a;--green2:#287fb5;--gold:#b9e2fa;--ink:#17374d;--muted:#49677d;--bg:#e5f4ff;--cream:#f0f9ff;--card:#fff;--line:#c5dfee}
+header{background:linear-gradient(110deg,#b5e2fc,#d8efff 60%,#a8d8f5);color:#123e60;overflow:hidden;margin-bottom:10px}
+header::after{display:none}
+.brand p,.right .lbl,.right a.ph{color:#174d73}
+.payb{color:#fff;background:#17649a}
+.panel{box-shadow:0 8px 22px rgba(23,100,154,.13)}
+.panel>h2,#prodPanel>h2{background:linear-gradient(90deg,#a8d8f5,#d0ebfc);color:#123e60}
+#prodPanel{border-color:#83bde0}
+input,select,textarea,.item{background:#f7fcff}
+.customer-box{background:#edf8ff;border-color:#b8d9ed}
+.customer-box input,.customer-box textarea{border-color:#b8d9ed}
+.cod{background:#eaf6ff}.slider,.mbox .pic,.slide{background:#e6f4ff!important}
+.dots button{background:#a7cde5}.dots button.on{background:var(--green)}
+.modal{background:rgba(17,57,86,.6)}.thankyou-message{color:#17649a}
+/* Horizontal header: brand | animated rider | contact */
+.top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;flex-wrap:nowrap;text-align:left}
+.brand{min-width:0;width:auto;text-align:left}.right{width:auto;min-width:0;text-align:right;align-items:flex-end}
+.rider-lane{position:relative;height:100px;overflow:hidden;min-width:0;width:100%;margin:0}
+.header-rider{position:absolute;left:0;bottom:0;width:112px;height:100px;object-fit:contain;pointer-events:none;animation:barshaRide 12s linear infinite}
+@keyframes barshaRide{from{left:0;transform:translateX(-100%)}to{left:100%;transform:translateX(0)}}
+@media(max-width:800px){.top{grid-template-columns:minmax(0,1.2fr) minmax(48px,1fr) minmax(0,1fr);gap:8px}.brand h1{font-size:clamp(15px,3.4vw,27px)}.brand p{font-size:clamp(10px,2vw,15px)}.right a.ph,.right .lbl{font-size:clamp(10px,2vw,15px);overflow-wrap:anywhere}.payb{font-size:clamp(10px,1.8vw,14px);padding:6px;min-height:0;width:auto;max-width:100%}.rider-lane{height:82px}.header-rider{width:90px;height:82px;animation-duration:8s}}
+@media(max-width:480px){.top{gap:5px}.rider-lane{height:65px}.header-rider{width:70px;height:65px}.right{gap:4px}}
+@media(prefers-reduced-motion:reduce){.header-rider{animation:none;left:50%;transform:translateX(-50%)}}
 </style>
 </head>
 <body>
 <header><div class="top">
-  <div class="brand"><h1>Barsha’s Pickle</h1><p>A Little Jar of Homemade Happiness !</p></div>
-  <div style="flex:1"></div>
+  <div class="brand"><div class="brand-copy"><h1>Barsha’s Pickle</h1><p>A Little Jar of Homemade Happiness !</p></div></div>
+  <div class="rider-lane"><img class="header-rider" src="Rider%20Barsha.gif" alt="Barsha cycling with pickle jars"></div>
   <div class="right">
     <div><span class="lbl">Contact:</span><a class="ph" id="phone" href="#"></a></div>
     <button class="payb" type="button" id="openPay">Click here to pay in advance</button>
